@@ -342,7 +342,31 @@ app.get("/", (req, res) => {
   });
 });
 const PORT = process.env.PORT || 5000;
+app.post("/api/login", async (req, res) => {
 
-app.listen(PORT, () => {
+    const { email, password } = req.body;
+
+    if (
+        email === "demo@student.com" &&
+        password === "demo123"
+    ) {
+        return res.json({
+            success: true,
+            message: "Login successful",
+            user: {
+                name: "Demo Student",
+                email
+            }
+        });
+    }
+
+    res.status(401).json({
+        success: false,
+        message: "Invalid email or password"
+    });
+
+});
+
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
 });
