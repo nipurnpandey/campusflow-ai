@@ -21,7 +21,9 @@ const app = express();
 const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY,
 });
+const cors = require("cors");
 
+app.use(cors());
 app.use(express.json());
 app.use("/api", attendanceRoutes);
 app.use("/api", dashboardRoutes);
@@ -332,9 +334,7 @@ app.post("/api/roadmap", async (req, res) => {
 //     co
 // nsole.log("Server running on port 5000");
 // });
-const cors = require("cors");
 
-app.use(cors());
 app.get("/", (req, res) => {
   res.json({
     status: "success",
