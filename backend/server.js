@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+const authRoutes = require("./routes/authRoutes");
+
 const dashboardRoutes =
     require("./routes/dashboardRoutes");
 const assignmentRoutes =
@@ -29,6 +31,7 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(express.json());
+app.use("/api", authRoutes);
 app.use("/api", attendanceRoutes);
 app.use("/api", dashboardRoutes);
 app.use("/api", aiHistoryRoutes);
