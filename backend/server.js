@@ -329,8 +329,12 @@ app.post("/api/roadmap", async (req, res) => {
 // });
 
 // app.listen(5000, () => {
-//     console.log("Server running on port 5000");
+//     co
+// nsole.log("Server running on port 5000");
 // });
+const cors = require("cors");
+
+app.use(cors());
 app.get("/", (req, res) => {
   res.json({
     status: "success",
