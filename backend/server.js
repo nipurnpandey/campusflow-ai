@@ -113,10 +113,23 @@ app.post("/api/chat", async (req, res) => {
                 model: "llama-3.3-70b-versatile",
             });
 
+        const reply =
+            chatCompletion.choices[0]
+                .message.content;
+
+        // SAVE IN SUPABASE
+        await supabase
+            .from("ai_history")
+            .insert([
+                {
+                    feature: "chat",
+                    input_text: message,
+                    output_text: reply
+                }
+            ]);
+
         res.json({
-            reply:
-                chatCompletion.choices[0]
-                    .message.content,
+            reply
         });
 
     } catch (error) {
