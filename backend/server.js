@@ -53,6 +53,25 @@ app.get("/api/assignments", async (req, res) => {
     res.json(data);
 });
 
+app.get("/api/history", async (req, res) => {
+
+    const { data, error } =
+        await supabase
+            .from("ai_history")
+            .select("*")
+            .order("id", {
+                ascending: false
+            });
+
+    if (error) {
+        return res.status(500)
+            .json(error);
+    }
+
+    res.json(data);
+
+});
+
 // CREATE assignment
 app.post("/api/assignments", async (req, res) => {
 
